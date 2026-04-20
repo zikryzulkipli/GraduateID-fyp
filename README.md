@@ -1,142 +1,147 @@
-# GraduateID - Blockchain Credential System
+# GraduateID - Blockchain Credential and Verification System
 
-A decentralized digital identity and credential management system for education built on Ethereum blockchain with IPFS storage.
+GraduateID is a final year project that manages educational identity, credential issuance, and online exam verification using Ethereum smart contracts with a React frontend.
+
+## Current System Snapshot
+
+- Active smart contracts: 5
+- Frontend stack: React 19 + TypeScript + Vite
+- Blockchain stack: Hardhat + Solidity 0.8.28 + OpenZeppelin
+- Storage model: on-chain credential metadata with IPFS hash references
+- Deployment model: local-first workflow for Hardhat node and frontend integration
 
 ## Core Features
 
-✅ **Identity Management** - Role-based user registration (Student, Examiner, Admin, Staff)  
-✅ **Credential Issuance** - Direct credential issuance with IPFS integration  
-✅ **Verification System** - Hash-based credential verification for employers  
-✅ **Online Exam Verification** - OTP-based exam identity verification with multi-student support 
-✅ **IPFS Integration** - Decentralized storage via Pinata for credentials
+- Role-based identity management (Student, Examiner, Admin, Staff)
+- Admin-controlled credential issuance with IPFS hash tracking
+- Hash-based credential verification for third-party checks
+- OTP-based online exam verification with cooldown after repeated failures
+- Student and examiner dashboard flows in frontend components
 
-## Smart Contracts
+## Active Smart Contracts
 
-- **GraduateID.sol** - User registration, role management, multi-admin governance
-- **IssueCredential.sol** - Credential issuance with IPFS hash storage
-- **HashChecker.sol** - Credential authenticity verification
-- **OnlineExam.sol** - OTP-based exam verification with request/approve flow
-- **IDRegistry.sol** - Centralized ID assignment (optional)
-- **MultiSigManager.sol** - Multi-signature admin governance (optional)
+- contracts/GraduateID.sol: user registration, roles, admin management
+- contracts/IssueCredential.sol: credential issue/revoke/update and query endpoints
+- contracts/OnlineExam.sol: exam request lifecycle and OTP verification
+- contracts/HashChecker.sol: public hash verification with metadata responses
+- contracts/IDRegistry.sol: on-chain ID assignment and lookup
 
-## Quick Start
+Note: artifacts and ABI folders may still include legacy files from previous revisions, but the active contracts in contracts/ are the source of truth.
+
+## Project Structure
+
+```text
+contracts/                 Solidity contracts (source of truth)
+scripts/                   Deploy, debug, ABI export, role checks
+frontend/                  React app
+frontend/src/abi/          ABI files consumed by frontend
+frontend/src/components/   UI pages and feature components
+documentation/             System guides and reference docs
+```
+
+## Quick Start (Local)
+
+1. Install dependencies
 
 ```bash
-# Install dependencies
 npm install
-cd frontend && npm install && cd ..
+cd frontend
+npm install
+cd ..
+```
 
-# Start local Hardhat node
-npx hardhat node
+2. Start local blockchain
 
-# Deploy contracts (new terminal)
+```bash
+npm run node
+```
+
+3. In a second terminal, compile and deploy
+
+```bash
+npm run compile
 npm run deploy:local
+```
 
-# Export contract ABIs to frontend
+4. Export ABIs to frontend
+
+```bash
 npm run export:abis
+```
 
-# Start frontend dev server
+5. Start frontend
+
+```bash
 cd frontend
 npm run dev
 ```
 
-Access at: http://localhost:5173
+Frontend URL: http://localhost:5173
 
-## Key Commands
+## Root Commands
 
 ```bash
-# Smart Contract Development
-npx hardhat compile              # Compile contracts
-npx hardhat test                 # Run tests
-npm run deploy:local             # Deploy to local network
-npm run export:abis              # Export ABIs to frontend
-
-# Frontend Development
-cd frontend
-npm run dev                      # Start dev server
-npm run build                    # Production build
-
-# Check admin status
-npm run debug:admin
-
-# Verify deployment
-npm run verify:deployment
+npm run node               # Start Hardhat local node
+npm run compile            # Compile contracts
+npm run deploy:local       # Deploy contracts to localhost
+npm run verify:deployment  # Run deployment verification script
+npm run export:abis        # Export contract ABIs to frontend/src/abi
+npm run check:roles        # Check role state
+npm run debug:admin        # Debug admin permissions
+npm run setup:local        # Compile + export ABIs + deploy
 ```
 
-## 📚 Documentation
+## Frontend Commands
 
-- **[IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md)** - Complete project status and features
-- **[SECURITY_AND_IMPROVEMENTS.md](SECURITY_AND_IMPROVEMENTS.md)** - Security improvements and resolutions
-- **[FRONTEND_INTEGRATION_GUIDE.md](FRONTEND_INTEGRATION_GUIDE.md)** - Frontend development guide
-- **[NEW_SYSTEM_FLOWS.md](NEW_SYSTEM_FLOWS.md)** - Complete system flow diagrams
-- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Quick command reference
-- **[FUTURE_IMPROVEMENTS.md](FUTURE_IMPROVEMENTS.md)** - Planned enhancements and roadmap
+```bash
+cd frontend
+npm run dev                # Start Vite dev server
+npm run build              # Production build
+npm run lint               # Lint frontend
+npm run preview            # Preview production build
+```
 
-## System Architecture
+## Main Flows
 
-**Credential Issuance Flow:**
-1. Admin uploads credential file → IPFS
-2. IPFS hash + metadata stored on-chain
-3. Student receives notification
-4. Student views credential in dashboard
+### Credential Issuance
 
-**Exam Verification Flow:**
-1. Examiner creates exam request for student
-2. Student requests OTP verification
-3. Examiner approves → generates time-limited OTP
-4. Student enters OTP to verify identity
-5. System records verification on-chain
+1. Admin uploads credential file to IPFS (off-chain).
+2. Admin submits credential metadata and IPFS hash on-chain via IssueCredential.
+3. Student retrieves credentials from contract-backed frontend views.
 
-**Credential Verification (Third Party):**
-1. Employer receives IPFS hash from student
-2. Hash entered in verification portal
-3. Blockchain confirms authenticity
-4. Metadata displayed for validation
+### Exam Verification
 
-## Tech Stack Details
+1. Student requests exam verification (or examiner creates request).
+2. Examiner approves request with hashed OTP.
+3. Student submits OTP for on-chain verification.
+4. Failed OTP attempts are rate-limited via cooldown logic.
 
-- **Solidity 0.8.x** - Smart contract language
-- **Hardhat** - Development environment
-- **OpenZeppelin** - Secure contract libraries
-- **React 18 + TypeScript** - Frontend framework
-- **Ethers.js v6** - Blockchain interaction
-- **Vite** - Fast build tool
-- **IPFS/Pinata** - Decentralized storage
+### Employer Verification
 
-## Security & Compliance
+1. Employer submits IPFS hash to hash verification view.
+2. HashChecker queries IssueCredential state.
+3. System returns validity and metadata.
 
-✅ 11/12 security weaknesses resolved  
-✅ Multi-admin governance implemented  
-✅ Role-based access control  
-✅ Time-limited OTP verification  
-✅ Tamper-proof IPFS storage  
-✅ Complete audit trail via events  
-⏳ Multi-sig operations (optional enhancement)
+## Documentation
 
-See [SECURITY_AND_IMPROVEMENTS.md](SECURITY_AND_IMPROVEMENTS.md) for details.
+- documentation/DOCUMENTATION_INDEX.md: entry point to all guides
+- documentation/IMPLEMENTATION_STATUS.md: implementation and status tracking
+- documentation/SECURITY_AND_IMPROVEMENTS.md: security improvements and known gaps
+- documentation/FRONTEND_INTEGRATION_GUIDE.md: frontend integration details
+- documentation/NEW_SYSTEM_FLOWS.md: end-to-end flow documentation
+- documentation/QUICK_REFERENCE.md: commands and quick lookup tables
+- documentation/FUTURE_IMPROVEMENTS.md: roadmap items
 
-## Contributing
+## Notes and Caveats
 
-Contributions welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes with tests
-4. Submit a Pull Request
-
-See [FUTURE_IMPROVEMENTS.md](FUTURE_IMPROVEMENTS.md) for enhancement ideas.
+- The test folder currently exists as a scaffold and may need additional automated tests for full CI readiness.
+- Some documentation files include historical references from earlier architecture phases; use contracts/ and scripts/ as operational truth.
 
 ## License
 
-Educational Project - Final Year Project 2026
+Educational project, Final Year Project 2026.
 
-## Support & Contact
+## Status
 
-- **Issues:** GitHub Issues
-- **Documentation:** See files listed above
-- **Future Features:** [FUTURE_IMPROVEMENTS.md](FUTURE_IMPROVEMENTS.md)
-
----
-
-**Last Updated:** January 6, 2026  
-**Version:** 1.0.0  
-**Status:** ✅ Production Ready (Core Features Complete)
+- Last updated: April 20, 2026
+- Repository status: active development with working local deployment workflow
