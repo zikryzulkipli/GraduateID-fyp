@@ -1,0 +1,143 @@
+.student-mainpage {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: #f5f5f5;
+}
+
+.student-container {
+	flex: 1;
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+	padding: 40px 32px;
+}
+
+.page-title {
+	font-size: 32px;
+	font-weight: 400;
+	color: #333;
+	margin-bottom: 32px;
+	text-align: center;
+}
+
+.page-title strong { font-weight: 600; }
+
+/* Action Cards */
+.student-actions {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 24px;
+	margin-bottom: 48px;
+}
+
+.student-action-card {
+	padding: 32px 24px;
+	border-radius: 12px;
+	cursor: pointer;
+	transition: transform 0.3s, box-shadow 0.3s;
+	text-align: center;
+	color: white;
+}
+
+.student-action-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.student-action-card.progress { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+.student-action-card.credentials { background: linear-gradient(135deg, #d4a017 0%, #b8860b 100%); }
+.student-action-card.exams { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+.icon { font-size: 48px; margin-bottom: 16px; }
+.student-action-card h3 { font-size: 20px; font-weight: 600; margin: 0 0 8px; }
+.student-action-card p { font-size: 14px; margin: 0; opacity: 0.9; }
+
+/* Sections */
+.student-section {
+	background: white;
+	padding: 32px;
+	border-radius: 12px;
+	margin-bottom: 32px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.student-section h2 {
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	margin: 0 0 24px;
+}
+
+/* Exams list */
+.exam-list { display: flex; flex-direction: column; gap: 16px; }
+.exam-row { display: flex; gap: 16px; padding: 16px; background-color: #f9f9f9; border-radius: 8px; border-left: 4px solid #1a7a7a; }
+.exam-number { display:flex; align-items:center; justify-content:center; width:32px; height:32px; background-color:#1a7a7a; color:#fff; border-radius:50%; font-weight:600; flex-shrink:0; }
+.exam-title { margin: 0 0 4px; font-size: 16px; font-weight: 600; color: #333; }
+.exam-subtitle { margin: 4px 0; font-size: 14px; color: #666; font-weight: 500; }
+.exam-datetime { margin: 8px 0 0; font-size: 12px; color: #999; font-style: italic; }
+
+/* Timeline */
+.timeline { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.timeline-item { display:flex; align-items:flex-start; gap: 12px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: #1a7a7a; margin-top: 6px; }
+.semester { font-weight: 700; font-size: 14px; color: #222; }
+.scores { font-size: 13px; color: #555; }
+
+/* Achievements */
+.achievement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.achievement-card { 
+  background:#f9f9f9; 
+  border-radius: 10px; 
+  padding: 16px; 
+  border-bottom: 3px solid #d4a017;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.achievement-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.achievement-title { font-weight: 700; font-size: 14px; color:#222; }
+.achievement-desc { font-size: 12px; color:#666; margin-top: 6px; font-family: monospace; }
+
+.credential-loading,
+.no-credentials {
+  text-align: center;
+  padding: 24px;
+  color: #666;
+  font-size: 14px;
+}
+
+.view-all-credentials {
+  text-align: center;
+  padding: 12px;
+  color: #0f766e;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.view-all-credentials:hover {
+  color: #0b5c55;
+  text-decoration: underline;
+}
+
+/* Footer */
+.student-footer {
+	background-color: #1a7a7a;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	font-size: 14px;
+	margin-top: auto;
+}
+.student-footer p { margin: 0; }
+
+@media (max-width: 768px) {
+	.student-container { padding: 20px 16px; }
+	.page-title { font-size: 24px; margin-bottom: 24px; }
+	.student-actions { gap: 16px; margin-bottom: 32px; }
+	.student-section { padding: 20px; margin-bottom: 24px; }
+	.exam-row { padding: 12px; }
+}

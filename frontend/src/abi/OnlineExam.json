@@ -1,0 +1,368 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_graduateIDAddress",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "examiner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "examID",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "otpExpiry",
+        "type": "uint256"
+      }
+    ],
+    "name": "ExamRequestApproved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "examID",
+        "type": "string"
+      }
+    ],
+    "name": "ExamRequestCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "examID",
+        "type": "string"
+      }
+    ],
+    "name": "StudentVerifiedForExam",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "OTP_FAIL_COOLDOWN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "OTP_VALID_DURATION",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_studentAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_examID",
+        "type": "string"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_otpHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "approveRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_studentAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_studentID",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_examID",
+        "type": "string"
+      }
+    ],
+    "name": "createExamRequestForStudent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "name": "examRequests",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "studentID",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "studentAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "examID",
+        "type": "string"
+      },
+      {
+        "internalType": "enum OnlineExam.requestStatus",
+        "name": "examStatus",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reqTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "otpExpiry",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "otpHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "otpUsed",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_student",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_examID",
+        "type": "string"
+      }
+    ],
+    "name": "getExamRequest",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "studentID",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "studentAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "examID",
+            "type": "string"
+          },
+          {
+            "internalType": "enum OnlineExam.requestStatus",
+            "name": "examStatus",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reqTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "otpExpiry",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "otpHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bool",
+            "name": "otpUsed",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct OnlineExam.ExamRequest",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_studentAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_examID",
+        "type": "string"
+      }
+    ],
+    "name": "getOTPStatus",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "isValid",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "isUsed",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "isExpired",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_student",
+        "type": "address"
+      }
+    ],
+    "name": "getStudentExamIds",
+    "outputs": [
+      {
+        "internalType": "string[]",
+        "name": "",
+        "type": "string[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_studentID",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_examID",
+        "type": "string"
+      }
+    ],
+    "name": "requestExam",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_examID",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_otp",
+        "type": "string"
+      }
+    ],
+    "name": "verifyOTP",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

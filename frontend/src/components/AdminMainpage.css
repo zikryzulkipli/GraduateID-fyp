@@ -1,0 +1,252 @@
+.mainpage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.mainpage-container {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 32px;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.page-title strong {
+  font-weight: 600;
+}
+
+/* Action Cards */
+.action-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.action-card {
+  padding: 32px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  color: white;
+}
+
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.register-card {
+  background: #3b82f6;
+}
+
+.issue-card {
+  background: #d4a017;
+}
+
+.admin-card {
+  background: #667eea;
+}
+
+.multisig-card {
+  background: #f093fb;
+}
+
+.credential-mgmt-card {
+  background: #fa8072;
+}
+
+/* Student: Exams card uses consistent sizing with a red theme */
+.exams-card {
+  background: #ef4444;
+}
+
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.action-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.action-card p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Credentials Section */
+.credentials-section,
+.examiners-section {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.credentials-section h2,
+.examiners-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.credentials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.credential-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid #1a7a7a;
+}
+
+.credential-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #1a7a7a;
+  color: white;
+  border-radius: 50%;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.credential-content h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.credential-content .subtitle {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.credential-content .due-date {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+}
+
+/* Examiners Section */
+.examiners-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.examiner-item {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-bottom: 3px solid #d4f1f4;
+}
+
+.examiner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.examiner-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.examiner-code {
+  font-size: 12px;
+  color: #999;
+  font-family: 'Courier New', monospace;
+  background-color: #e8e8e8;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.examiner-subject {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.examiner-datetime {
+  margin: 0;
+  font-size: 13px;
+  color: #999;
+}
+
+/* Footer */
+.mainpage-footer {
+  background-color: #1a7a7a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+.mainpage-footer p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .mainpage-container {
+    padding: 20px 16px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .action-cards {
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .credentials-section,
+  .examiners-section {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .credential-item,
+  .examiner-item {
+    padding: 12px;
+  }
+}

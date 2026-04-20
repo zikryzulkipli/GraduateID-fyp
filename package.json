@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "hardhat": "^2.28.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0"
+  },
+  "scripts": {
+    "node": "hardhat node",
+    "compile": "hardhat compile",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "verify:deployment": "hardhat run scripts/verify-deployment.js --network localhost",
+    "check:roles": "hardhat run scripts/check-roles.js --network localhost",
+    "debug:admin": "hardhat run scripts/debug-admin.js --network localhost",
+    "export:abis": "node scripts/export-abis.js",
+    "setup:local": "npm run compile && npm run export:abis && npm run deploy:local",
+    "postdeploy:local": "npm run export:abis"
+  }
+}
